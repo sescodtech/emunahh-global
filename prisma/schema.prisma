@@ -1,0 +1,424 @@
+// ============================================================
+// EMUNAHH GLOBAL CONSULT V2.0 — DATABASE ARCHITECTURE (Phase 4)
+// Prisma schema, PostgreSQL
+// Design goal: every visible piece of content on the 5 pages
+// (Home, Service, About Us, Contact Us, Privacy Policy) is
+// editable from the Admin Dashboard. No hardcoded content.
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------
+// AUTH & ACCESS CONTROL (NextAuth + RBAC)
+// ------------------------------------------------------------
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String? // hashed, for credentials login
+  role          UserRole  @default(EDITOR)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts   Account[]
+  sessions   Session[]
+  auditLogs  AuditLog[]
+  mediaItems MediaAsset[]
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Every meaningful admin action is logged (audit fix #4 — compliance)
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String // e.g. "UPDATE_SERVICE", "DELETE_TESTIMONIAL"
+  entityType String // e.g. "Service", "Testimonial", "SiteSettings"
+  entityId   String?
+  metadata   Json? // before/after diff snapshot
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------
+// GLOBAL SITE SETTINGS (singleton row)
+// ------------------------------------------------------------
+
+model SiteSettings {
+  id                 String   @id @default("singleton")
+  companyName        String   @default("Emunahh Global Consult Limited")
+  rcNumber           String   @default("RC 8937100")
+  tagline            String   @default("Travel & Financial Advisory")
+  officeAddress      String
+  mapLatitude        Float?
+  mapLongitude       Float?
+  mapPlaceId         String? // fixes audit #1 — precise pin
+  phonePrimary       String
+  phoneSecondary     String?
+  email              String
+  workingHours       String // e.g. "Mon–Sat · 8am–7pm"
+  instagramHandle    String?
+  tiktokHandle       String?
+  linkedinUrl        String?
+  whatsappNumber     String
+  whatsappDefaultMsg String? // template for pre-filled deep link (audit #9)
+  footerText         String?
+  updatedAt          DateTime @updatedAt
+  updatedById        String?
+}
+
+// ------------------------------------------------------------
+// NAVIGATION
+// ------------------------------------------------------------
+
+model NavigationItem {
+  id       String  @id @default(cuid())
+  label    String
+  href     String
+  order    Int     @default(0)
+  isCTA    Boolean @default(false) // distinct "Book Consultation" button (audit #12)
+  isActive Boolean @default(true)
+
+  @@index([order])
+}
+
+// ------------------------------------------------------------
+// PAGES (generic shell for Hero + SEO per route)
+// ------------------------------------------------------------
+
+enum PageSlug {
+  HOME
+  SERVICE
+  ABOUT
+  CONTACT
+  PRIVACY_POLICY
+}
+
+model Page {
+  id            String   @id @default(cuid())
+  slug          PageSlug @unique
+  heroEyebrow   String?
+  heroHeadline  String
+  heroSubcopy   String?  @db.Text
+  heroImageId   String?
+  ctaPrimary    String?
+  ctaSecondary  String?
+  bodyContent   Json? // rich text blocks for long-form pages (About story, Privacy Policy)
+  updatedAt     DateTime @updatedAt
+  updatedById   String?
+
+  heroImage MediaAsset? @relation(fields: [heroImageId], references: [id])
+  seo       SeoMeta?
+  stats     Stat[]
+}
+
+// ------------------------------------------------------------
+// SEO
+// ------------------------------------------------------------
+
+model SeoMeta {
+  id              String   @id @default(cuid())
+  pageId          String   @unique
+  metaTitle       String
+  metaDescription String   @db.Text
+  ogImageId       String?
+  canonicalUrl    String?
+  keywords        String[]
+  structuredData  Json? // JSON-LD: LocalBusiness / Service / FAQPage (audit #2)
+  updatedAt       DateTime @updatedAt
+
+  page    Page        @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  ogImage MediaAsset? @relation(fields: [ogImageId], references: [id])
+}
+
+// ------------------------------------------------------------
+// STATS (the "500+ clients / 98% success" strips)
+// ------------------------------------------------------------
+
+model Stat {
+  id     String @id @default(cuid())
+  pageId String
+  label  String // "Clients Served"
+  value  String // "500+"
+  icon   String?
+  order  Int    @default(0)
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, order])
+}
+
+// ------------------------------------------------------------
+// DESTINATIONS (Home — Popular Destinations)
+// ------------------------------------------------------------
+
+model Destination {
+  id        String  @id @default(cuid())
+  name      String // "United Kingdom"
+  routeCode String? // "LOS → LHR"
+  imageId   String?
+  order     Int     @default(0)
+  isActive  Boolean @default(true)
+
+  image MediaAsset? @relation(fields: [imageId], references: [id])
+
+  @@index([order])
+}
+
+// ------------------------------------------------------------
+// SERVICES (the 5 core services — single source of truth,
+// fixes audit #5 duplicate content between Home and Service page)
+// ------------------------------------------------------------
+
+enum ServiceType {
+  FLIGHT_BOOKING
+  VISA_CONSULTANCY
+  PASSPORT
+  FINANCIAL_ADVISORY
+  CAC_REGISTRATION
+}
+
+model Service {
+  id               String      @id @default(cuid())
+  type             ServiceType @unique
+  slug             String      @unique
+  title            String
+  shortDescription String // used on Home cards
+  fullDescription  String      @db.Text // used on Service page
+  icon             String?
+  imageId          String?
+  featureTags      String[]
+  order            Int         @default(0)
+  isActive         Boolean     @default(true)
+  updatedAt        DateTime    @updatedAt
+
+  image             MediaAsset?        @relation(fields: [imageId], references: [id])
+  enquiryFormFields EnquiryFieldSpec[] // drives the smart conditional form (audit #3)
+
+  @@index([order])
+}
+
+// Defines which extra fields appear on the enquiry form
+// when a given service is selected — data-driven, no code change needed.
+model EnquiryFieldSpec {
+  id          String  @id @default(cuid())
+  serviceId   String
+  fieldKey    String // "destinationCountry", "travelDate", "companyName"
+  label       String
+  fieldType   String // "text" | "date" | "select" | "textarea"
+  options     String[] // for "select" type
+  isRequired  Boolean @default(true)
+  order       Int     @default(0)
+
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([serviceId, order])
+}
+
+// ------------------------------------------------------------
+// PROCESS STEPS ("Simple Process" — real sequence, numbering justified)
+// ------------------------------------------------------------
+
+model ProcessStep {
+  id          String   @id @default(cuid())
+  page        PageSlug // HOME or SERVICE (each has its own 4-step copy)
+  stepNumber  Int
+  title       String
+  description String   @db.Text
+
+  @@unique([page, stepNumber])
+}
+
+// ------------------------------------------------------------
+// CORE VALUES (About — not a sequence, no numbering)
+// ------------------------------------------------------------
+
+model CoreValue {
+  id          String  @id @default(cuid())
+  title       String // "Integrity"
+  description String  @db.Text
+  icon        String?
+  order       Int     @default(0)
+}
+
+// ------------------------------------------------------------
+// LEADERSHIP
+// ------------------------------------------------------------
+
+model TeamMember {
+  id       String  @id @default(cuid())
+  name     String
+  role     String
+  bio      String  @db.Text
+  photoId  String?
+  order    Int     @default(0)
+  isActive Boolean @default(true)
+
+  photo MediaAsset? @relation(fields: [photoId], references: [id])
+}
+
+// ------------------------------------------------------------
+// PROBLEMS WE SOLVE (About page checklist)
+// ------------------------------------------------------------
+
+model ProblemSolved {
+  id    String @id @default(cuid())
+  text  String @db.Text
+  order Int    @default(0)
+}
+
+// ------------------------------------------------------------
+// TESTIMONIALS
+// ------------------------------------------------------------
+
+model Testimonial {
+  id          String      @id @default(cuid())
+  clientName  String
+  roleOrCity  String?
+  quote       String      @db.Text
+  rating      Int         @default(5)
+  avatarId    String?
+  serviceType ServiceType?
+  sourceUrl   String? // link to real Google review (audit #6)
+  isVerified  Boolean     @default(false)
+  order       Int         @default(0)
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+
+  avatar MediaAsset? @relation(fields: [avatarId], references: [id])
+
+  @@index([order])
+}
+
+// ------------------------------------------------------------
+// FAQ
+// ------------------------------------------------------------
+
+model Faq {
+  id       String  @id @default(cuid())
+  question String
+  answer   String  @db.Text
+  order    Int     @default(0)
+  isActive Boolean @default(true)
+
+  @@index([order])
+}
+
+// ------------------------------------------------------------
+// ENQUIRIES (the Contact form submissions)
+// ------------------------------------------------------------
+
+enum UrgencyLevel {
+  STANDARD
+  PRIORITY
+  URGENT
+  EMERGENCY
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model Enquiry {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique // e.g. "EGC-2026-000482"
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
+  serviceType     ServiceType
+  conditionalData Json // answers to the service-specific fields (audit #3)
+  urgency         UrgencyLevel  @default(STANDARD)
+  message         String?       @db.Text
+  consentGiven    Boolean       @default(false) // audit #4
+  consentAt       DateTime?
+  status          EnquiryStatus @default(NEW)
+  assignedToId    String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([status])
+  @@index([serviceType])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------
+// MEDIA LIBRARY (Cloudinary-backed)
+// ------------------------------------------------------------
+
+enum MediaType {
+  IMAGE
+  DOCUMENT
+}
+
+model MediaAsset {
+  id            String    @id @default(cuid())
+  cloudinaryId  String    @unique
+  url           String
+  altText       String?
+  type          MediaType @default(IMAGE)
+  width         Int?
+  height        Int?
+  uploadedById  String?
+  createdAt     DateTime  @default(now())
+
+  uploadedBy    User?         @relation(fields: [uploadedById], references: [id])
+  pages         Page[]
+  seoUses       SeoMeta[]
+  destinations  Destination[]
+  services      Service[]
+  testimonials  Testimonial[]
+  teamMembers   TeamMember[]
+}

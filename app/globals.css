@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-instrument-serif: "Instrument Serif", serif;
+  --font-plex-mono: "IBM Plex Mono", monospace;
+  /* General Sans requires self-hosting or a CDN license; Tailwind falls
+     back to system sans-serif until you add it — see README. */
+  --font-general-sans: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: #f1f2ed;
+}
