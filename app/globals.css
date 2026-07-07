@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,500;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,9 +8,10 @@
   --font-instrument-serif: "Instrument Serif", serif;
   --font-plex-mono: "IBM Plex Mono", monospace;
   --font-playfair: "Playfair Display", serif;
-  /* General Sans requires self-hosting or a CDN license; Tailwind falls
-     back to system sans-serif until you add it — see README. */
-  --font-general-sans: system-ui, -apple-system, sans-serif;
+  /* Plus Jakarta Sans replaces General Sans, which requires a paid/
+     self-hosted license and was never actually loading — the body
+     font was silently falling back to the OS system font before. */
+  --font-general-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 }
 
 body {
