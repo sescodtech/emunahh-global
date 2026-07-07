@@ -1,7 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/layout";
 import { Reveal } from "@/components/reveal";
+import { FallbackImage } from "@/components/fallback-image";
+import { cloudinaryUrl } from "@/lib/cloudinary";
 
 interface ServiceRow {
   index: number;
@@ -10,6 +11,7 @@ interface ServiceRow {
   benefits: string[];
   cta: string;
   image: string;
+  cloudinaryPublicId?: string;
 }
 
 export function ServiceShowcase({ services }: { services: ServiceRow[] }) {
@@ -17,6 +19,9 @@ export function ServiceShowcase({ services }: { services: ServiceRow[] }) {
     <div className="divide-y divide-ink-navy/8">
       {services.map((service, i) => {
         const reversed = i % 2 === 1;
+        const src = service.cloudinaryPublicId
+          ? cloudinaryUrl(service.cloudinaryPublicId, service.image, { width: 1200 })
+          : service.image;
         return (
           <Container key={service.index} className="py-16 sm:py-24">
             <Reveal
@@ -25,10 +30,12 @@ export function ServiceShowcase({ services }: { services: ServiceRow[] }) {
               }`}
             >
               <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={service.image}
+                <FallbackImage
+                  src={src}
+                  fallbackSrc={service.image}
                   alt={service.title}
                   fill
+                  loading="lazy"
                   sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />

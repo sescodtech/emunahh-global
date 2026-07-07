@@ -14,11 +14,17 @@ export const homeHero = {
     href: "https://wa.me/2348179171456",
   },
   stampBadgeLabel: "Visa Approved · Canada · UK · Schengen",
-  // Placeholder photography (Unsplash, free to use) — swap for a real
-  // Cloudinary-hosted photo (e.g. an approved client at the airport,
-  // or the office) once one is uploaded to the Media Library.
+  // Real photo: upload to Cloudinary and set this public ID (e.g.
+  // "emunahh/hero/airport-departure"). Falls back to the Unsplash
+  // placeholder below until a real Cloudinary asset exists.
+  cloudinaryPublicId: "emunahh/hero/airport-departure",
   backgroundImage:
     "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2400&auto=format&fit=crop",
+  // The flying-plane cutout that animates across the hero. Defaults to
+  // the local /public/images/plane.png asset. Set this to a Cloudinary
+  // secure_url (from the admin's Hero Plane upload) to override it
+  // without touching code.
+  planeImageUrl: "",
 };
 
 export const trustIndicators = [
@@ -64,6 +70,7 @@ export const destinations = [
 export const services = [
   {
     index: 1,
+    cloudinaryPublicId: "emunahh/services/flight-bookings",
     title: "Flight Bookings",
     description:
       "Domestic and international flight bookings at the best fares. We search across airlines to get you the most competitive price — with instant e-ticket confirmation and 24hr support.",
@@ -74,6 +81,7 @@ export const services = [
   },
   {
     index: 2,
+    cloudinaryPublicId: "emunahh/services/visa-consultancy",
     title: "Travel & Visa Consultancy",
     description:
       "End-to-end travel planning and visa application support for Canada, UK, USA, Schengen, Dubai and more. We handle documentation, guidance and follow-up until your visa is approved.",
@@ -84,6 +92,7 @@ export const services = [
   },
   {
     index: 3,
+    cloudinaryPublicId: "emunahh/services/passport",
     title: "International Passport",
     description:
       "New applications and renewals made simple. We guide you through the full NIS process — from form completion and biometrics scheduling to collection — with fast turnaround and zero hassle.",
@@ -94,6 +103,7 @@ export const services = [
   },
   {
     index: 4,
+    cloudinaryPublicId: "emunahh/services/financial-advisory",
     title: "Financial Advisory",
     description:
       "Access travel loans, business capital and strategic financial planning. We connect individuals and businesses with the right funding solutions to achieve their goals.",
@@ -104,6 +114,7 @@ export const services = [
   },
   {
     index: 5,
+    cloudinaryPublicId: "emunahh/services/business-registration",
     title: "Business Registration (CAC)",
     description:
       "Register your business with the Corporate Affairs Commission quickly and correctly. We handle sole proprietorships, limited liability companies and NGOs — end-to-end with all documentation sorted.",
