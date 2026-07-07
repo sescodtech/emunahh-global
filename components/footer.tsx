@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/layout";
+import { NewsletterForm } from "@/components/newsletter-form";
 
 interface FooterProps {
   companyName: string;
@@ -28,7 +29,7 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-lg bg-boarding-paper/10 text-boarding-paper/70 transition-colors hover:bg-brand-green hover:text-white"
+      className="flex h-10 w-10 items-center justify-center rounded-full bg-boarding-paper/10 text-boarding-paper/70 transition-colors hover:bg-brand-green hover:text-white"
     >
       {children}
     </a>
@@ -38,11 +39,14 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
 function FooterColumn({ heading, links }: { heading: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-stamp-gold">{heading}</p>
-      <ul className="space-y-2.5">
+      <p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-stamp-gold">{heading}</p>
+      <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className="font-body text-sm text-boarding-paper/70 hover:text-boarding-paper transition-colors">
+            <Link
+              href={link.href}
+              className="font-sans text-[15px] text-boarding-paper/70 transition-colors hover:text-boarding-paper"
+            >
               {link.label}
             </Link>
           </li>
@@ -72,18 +76,31 @@ export function Footer({
 }: FooterProps) {
   return (
     <footer className="bg-ink-navy text-boarding-paper/80">
+      {/* Newsletter band */}
+      <Container className="flex flex-col items-start justify-between gap-6 border-b border-boarding-paper/10 py-12 lg:flex-row lg:items-center">
+        <div>
+          <p className="font-sans text-2xl font-extrabold tracking-tight text-boarding-paper sm:text-3xl">
+            Stay ahead of visa &amp; travel updates.
+          </p>
+          <p className="mt-2 font-sans text-sm text-boarding-paper/60">
+            Occasional emails only — no spam, ever.
+          </p>
+        </div>
+        <NewsletterForm />
+      </Container>
+
       <Container className="grid gap-12 py-16 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
-        {/* Company intro */}
+        {/* Company */}
         <div>
           <Link href="/" className="inline-flex items-center rounded-lg bg-white px-3 py-2">
             <Image src={logoUrl} alt={companyName} width={150} height={50} className="h-8 w-auto object-contain" />
           </Link>
-          <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-boarding-paper/70">
+          <p className="mt-5 max-w-xs font-sans text-sm leading-relaxed text-boarding-paper/70">
             Nigeria&rsquo;s trusted partner for flights, visas, passports, financial advisory and
             business registration &mdash; handled end to end, nationwide.
           </p>
           <p className="mt-4 font-mono text-xs text-boarding-paper/50">{tagline} &middot; {rcNumber}</p>
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-6 flex flex-wrap gap-2.5">
             {whatsappNumber && (
               <SocialLink href={`https://wa.me/${whatsappNumber}`} label="WhatsApp">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.09-1.34A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.94 7.94 0 0 1-4.06-1.11l-.29-.17-3.02.79.8-2.94-.19-.3A7.95 7.95 0 1 1 12 20z"/></svg>
@@ -153,18 +170,18 @@ export function Footer({
             ]}
           />
 
-          <div className="mt-8">
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.15em] text-stamp-gold">Get In Touch</p>
-            <p className="font-body text-sm text-boarding-paper/70">{phonePrimary}</p>
-            {phoneSecondary && <p className="font-body text-sm text-boarding-paper/70">{phoneSecondary}</p>}
-            <p className="font-body text-sm text-boarding-paper/70">{email}</p>
-            {officeAddress && <p className="mt-2 font-body text-sm text-boarding-paper/70">{officeAddress}</p>}
+          <div className="mt-9">
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-stamp-gold">Get In Touch</p>
+            <p className="font-sans text-[15px] text-boarding-paper/70">{phonePrimary}</p>
+            {phoneSecondary && <p className="font-sans text-[15px] text-boarding-paper/70">{phoneSecondary}</p>}
+            <p className="font-sans text-[15px] text-boarding-paper/70">{email}</p>
+            {officeAddress && <p className="mt-3 font-sans text-[15px] text-boarding-paper/70">{officeAddress}</p>}
             {workingHours && <p className="mt-1 font-mono text-xs text-boarding-paper/50">{workingHours}</p>}
           </div>
         </div>
       </Container>
 
-      <Container className="flex flex-wrap items-center justify-between gap-3 border-t border-boarding-paper/10 py-6 font-mono text-xs text-boarding-paper/60">
+      <Container className="flex flex-wrap items-center justify-between gap-3 border-t border-boarding-paper/10 py-7 font-mono text-xs text-boarding-paper/60">
         <span>&copy; {new Date().getFullYear()} {companyName}. All rights reserved.</span>
         <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-boarding-paper">
           Privacy Policy

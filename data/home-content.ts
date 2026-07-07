@@ -4,17 +4,29 @@
 // Admin Dashboard, not hardcoded here.
 
 export const homeHero = {
-  eyebrow: "Emunahh Global Consult | Nigeria's Trusted Travel & Business Consultants",
-  headline: "Your Trusted Partner for Global Travel & Business Capital in Nigeria",
+  eyebrow: "Nigeria's Trusted Travel & Business Consultants",
+  headline: "Your Trusted Partner for Global Travel & Business Capital",
   subcopy:
-    "Nigeria's most trusted travel and business consulting firm. We handle your flights, visas, passports, business registration and financial advisory — wherever you are in Nigeria. 🇳🇬✈️",
-  ctaPrimary: { label: "Book a Flight", href: "/contact-us" },
+    "Nigeria's most trusted travel and business consulting firm. We handle your flights, visas, passports, business registration and financial advisory — wherever you are in Nigeria.",
+  ctaPrimary: { label: "Book a Consultation", href: "/contact-us" },
   ctaSecondary: {
     label: "Chat on WhatsApp",
     href: "https://wa.me/2348179171456",
   },
   stampBadgeLabel: "Visa Approved · Canada · UK · Schengen",
+  // Placeholder photography (Unsplash, free to use) — swap for a real
+  // Cloudinary-hosted photo (e.g. an approved client at the airport,
+  // or the office) once one is uploaded to the Media Library.
+  backgroundImage:
+    "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2400&auto=format&fit=crop",
 };
+
+export const trustIndicators = [
+  { label: "CAC Registered", value: "RC 8937100" },
+  { label: "Clients Served", value: "500+" },
+  { label: "Visa Success Rate", value: "98%" },
+  { label: "Avg. Processing", value: "72hrs" },
+];
 
 export const homeStats = [
   { label: "Clients Served", value: "500+" },
@@ -55,35 +67,50 @@ export const services = [
     title: "Flight Bookings",
     description:
       "Domestic and international flight bookings at the best fares. We search across airlines to get you the most competitive price — with instant e-ticket confirmation and 24hr support.",
-    cta: "Book Now",
+    benefits: ["Best-fare search across airlines", "Instant e-ticket confirmation", "24hr booking support"],
+    cta: "Book a Flight",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1600&auto=format&fit=crop",
   },
   {
     index: 2,
     title: "Travel & Visa Consultancy",
     description:
       "End-to-end travel planning and visa application support for Canada, UK, USA, Schengen, Dubai and more. We handle documentation, guidance and follow-up until your visa is approved.",
-    cta: "Learn More",
+    benefits: ["Full document preparation", "Application follow-up to approval", "Canada, UK, USA, Schengen & more"],
+    cta: "Start Your Application",
+    image:
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1600&auto=format&fit=crop",
   },
   {
     index: 3,
     title: "International Passport",
     description:
       "New applications and renewals made simple. We guide you through the full NIS process — from form completion and biometrics scheduling to collection — with fast turnaround and zero hassle.",
-    cta: "Learn More",
+    benefits: ["Form completion & biometrics scheduling", "New applications & renewals", "Fast, hassle-free turnaround"],
+    cta: "Apply for a Passport",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1600&auto=format&fit=crop&sat=-100",
   },
   {
     index: 4,
     title: "Financial Advisory",
     description:
       "Access travel loans, business capital and strategic financial planning. We connect individuals and businesses with the right funding solutions to achieve their goals.",
-    cta: "Learn More",
+    benefits: ["Travel loans & business capital", "Strategic financial planning", "Funding partner matching"],
+    cta: "Explore Financing",
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600&auto=format&fit=crop",
   },
   {
     index: 5,
     title: "Business Registration (CAC)",
     description:
       "Register your business with the Corporate Affairs Commission quickly and correctly. We handle sole proprietorships, limited liability companies and NGOs — end-to-end with all documentation sorted.",
-    cta: "Learn More",
+    benefits: ["Sole proprietorships, LLCs & NGOs", "Full CAC documentation handled", "Fast, correct registration"],
+    cta: "Register Your Business",
+    image:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop",
   },
 ];
 

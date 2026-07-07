@@ -17,8 +17,13 @@ const config: Config = {
         "brand-green": "#1C8A3E",
       },
       fontFamily: {
+        // Manrope, loaded via next/font in app/layout.tsx (--font-manrope).
+        // Used directly (font-sans) for the redesigned homepage's huge
+        // editorial headlines and body copy. font-display (Instrument
+        // Serif) is left untouched since About Us/Blog/etc still use it.
+        sans: ["var(--font-manrope)", "system-ui", "-apple-system", "sans-serif"],
         display: ["var(--font-instrument-serif)", "serif"],
-        body: ["var(--font-general-sans)", "sans-serif"],
+        body: ["var(--font-manrope)", "var(--font-general-sans)", "sans-serif"],
         mono: ["var(--font-plex-mono)", "monospace"],
         script: ["var(--font-playfair)", "serif"],
       },
