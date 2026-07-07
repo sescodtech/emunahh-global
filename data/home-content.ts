@@ -75,7 +75,7 @@ export const services = [
     index: 4,
     title: "Financial Advisory",
     description:
-      "Access travel loans, Proof of Funds (POF), business capital and strategic financial planning. We connect individuals and businesses with the right funding solutions to achieve their goals.",
+      "Access travel loans, business capital and strategic financial planning. We connect individuals and businesses with the right funding solutions to achieve their goals.",
     cta: "Learn More",
   },
   {
@@ -176,8 +176,13 @@ export const siteSettings = {
   email: "info@emunahh.com",
   officeAddress: "Adeoye Close, Meiran Bus Stop, Lagos State, Nigeria",
   workingHours: "Monday – Saturday · 8:00 AM – 7:00 PM",
+  logoUrl: "/logo.png",
   instagramHandle: "Emunahhglobal",
   tiktokHandle: "Emunahhglobal",
+  facebookUrl: "",
+  linkedinUrl: "",
+  youtubeUrl: "",
+  xUrl: "",
   whatsappNumber: "2348179171456",
 };
 
@@ -186,4 +191,10 @@ export const navLinks = [
   { label: "Service", href: "/service" },
   { label: "About Us", href: "/about-us" },
   { label: "Contact us", href: "/contact-us" },
+];
+
+export const navMoreLinks = [
+  { label: "Blog", href: "/blog" },
+  { label: "Careers", href: "/careers" },
+  { label: "FAQ", href: "/faq" },
 ];

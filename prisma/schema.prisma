@@ -42,6 +42,7 @@ model User {
   sessions   Session[]
   auditLogs  AuditLog[]
   mediaItems MediaAsset[]
+  blogPosts  BlogPost[]
 
   @@index([email])
 }
@@ -106,9 +107,13 @@ model SiteSettings {
   phoneSecondary     String?
   email              String
   workingHours       String // e.g. "Mon–Sat · 8am–7pm"
+  logoUrl            String? // Cloudinary-hosted logo, shown in navbar + footer
   instagramHandle    String?
   tiktokHandle       String?
+  facebookUrl        String?
   linkedinUrl        String?
+  youtubeUrl         String?
+  xUrl               String? // X (formerly Twitter)
   whatsappNumber     String
   whatsappDefaultMsg String? // template for pre-filled deep link (audit #9)
   footerText         String?
@@ -395,6 +400,55 @@ model Enquiry {
 }
 
 // ------------------------------------------------------------
+// CAREERS (Admin → Careers)
+// ------------------------------------------------------------
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+}
+
+model JobPosting {
+  id               String   @id @default(cuid())
+  title            String
+  department       String
+  location         String
+  type             JobType  @default(FULL_TIME)
+  summary          String   @db.Text
+  responsibilities String[]
+  requirements     String[]
+  isActive         Boolean  @default(false)
+  postedAt         DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+// ------------------------------------------------------------
+// BLOG (Admin → Blog)
+// ------------------------------------------------------------
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  excerpt     String    @db.Text
+  content     String    @db.Text
+  coverImageId String?
+  authorId    String?
+  tags        String[]
+  isActive    Boolean   @default(false) // draft vs published
+  publishedAt DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  coverImage MediaAsset? @relation(fields: [coverImageId], references: [id])
+  author     User?       @relation(fields: [authorId], references: [id])
+
+  @@index([isActive, publishedAt])
+}
+
+// ------------------------------------------------------------
 // MEDIA LIBRARY (Cloudinary-backed)
 // ------------------------------------------------------------
 
@@ -421,4 +475,5 @@ model MediaAsset {
   services      Service[]
   testimonials  Testimonial[]
   teamMembers   TeamMember[]
+  blogPosts     BlogPost[]
 }

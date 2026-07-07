@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { Container, SectionHeading } from "@/components/ui/layout";
 import { Button } from "@/components/ui/button";
 import { StatStrip } from "@/components/stat-strip";
-import { FaqAccordion } from "@/components/faq-accordion";
 import { ContactForm } from "@/components/contact-form";
-import { contactHero, contactStats, faqs, location } from "@/data/contact-content";
+import { contactHero, contactStats, location } from "@/data/contact-content";
 
 export default function ContactPage() {
   return (
@@ -45,17 +45,18 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-white py-20">
-        <Container className="max-w-3xl">
+      {/* FAQ TEASER */}
+      <section className="bg-white py-16">
+        <Container className="max-w-3xl text-center">
           <SectionHeading
             eyebrow="FAQ"
             title="Got Questions?"
-            description="Here are answers to the questions we get most often. Can't find what you're looking for? Fill the form above."
+            description="We've answered the questions we get most often — visa destinations, passport timelines, travel loans, business registration costs, and more."
+            align="center"
           />
-          <div className="mt-10">
-            <FaqAccordion items={faqs} />
-          </div>
+          <Button asChild variant="primary" className="mt-6">
+            <Link href="/faq">Read the Full FAQ →</Link>
+          </Button>
         </Container>
       </section>
 

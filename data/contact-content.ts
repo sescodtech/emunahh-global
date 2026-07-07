@@ -23,7 +23,7 @@ export const serviceOptions = [
   { value: "FLIGHT_BOOKING", label: "✈️ Flight Booking" },
   { value: "VISA_CONSULTANCY", label: "🌍 Travel & Visa Consultancy" },
   { value: "PASSPORT", label: "📘 International Passport" },
-  { value: "FINANCIAL_ADVISORY", label: "💰 Financial Advisory / POF" },
+  { value: "FINANCIAL_ADVISORY", label: "💰 Financial Advisory / Travel Loan" },
   { value: "CAC_REGISTRATION", label: "🏢 Business Registration (CAC)" },
   { value: "GENERAL_INQUIRY", label: "❓ General Inquiry" },
 ];
@@ -52,7 +52,7 @@ export const conditionalFields: Record<string, { key: string; label: string; typ
     { key: "applicationType", label: "New Application or Renewal", type: "select" },
   ],
   FINANCIAL_ADVISORY: [
-    { key: "goalType", label: "Travel Loan / Business Capital / POF", type: "text" },
+    { key: "goalType", label: "Travel Loan / Business Capital / Financial Planning", type: "text" },
   ],
   CAC_REGISTRATION: [
     { key: "companyName", label: "Proposed Company Name", type: "text" },
@@ -81,10 +81,10 @@ export const faqs = [
       "Standard processing through NIS takes 6–8 weeks. We help you complete forms correctly, schedule biometrics and track progress — reducing errors that cause delays.",
   },
   {
-    id: "pof",
-    question: "What is Financial Advisory / POF?",
+    id: "travel-loan",
+    question: "What is Financial Advisory / Travel Loan?",
     answer:
-      "POF (Proof of Funds) is a document required by many embassies to show you have sufficient funds for your trip. We also offer travel loan facilitation and business capital advisory for individuals and SMEs.",
+      "Our Travel Loan service helps you access the funds you need to travel — including facilitation support for individuals who need financing for flights, visas, or related travel costs. We also offer business capital advisory and strategic financial planning for individuals and SMEs.",
   },
   {
     id: "cac-cost",

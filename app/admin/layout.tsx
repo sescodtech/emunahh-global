@@ -8,6 +8,8 @@ const contentLinks = [
   { label: "Services", href: "/admin/services" },
   { label: "Testimonials", href: "/admin/testimonials" },
   { label: "FAQs", href: "/admin/faqs" },
+  { label: "Blog", href: "/admin/blog" },
+  { label: "Careers", href: "/admin/careers" },
   { label: "Site Settings", href: "/admin/settings" },
 ];
 

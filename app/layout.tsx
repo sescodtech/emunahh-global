@@ -23,8 +23,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           phonePrimary={siteSettings.phonePrimary}
           phoneSecondary={siteSettings.phoneSecondary}
           email={siteSettings.email}
+          logoUrl={siteSettings.logoUrl}
           instagramHandle={siteSettings.instagramHandle}
           tiktokHandle={siteSettings.tiktokHandle}
+          facebookUrl={siteSettings.facebookUrl}
+          linkedinUrl={siteSettings.linkedinUrl}
+          youtubeUrl={siteSettings.youtubeUrl}
+          xUrl={siteSettings.xUrl}
+          whatsappNumber={siteSettings.whatsappNumber}
         />
       </body>
     </html>

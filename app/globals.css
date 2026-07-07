@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,500;1,600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +7,7 @@
 :root {
   --font-instrument-serif: "Instrument Serif", serif;
   --font-plex-mono: "IBM Plex Mono", monospace;
+  --font-playfair: "Playfair Display", serif;
   /* General Sans requires self-hosting or a CDN license; Tailwind falls
      back to system sans-serif until you add it — see README. */
   --font-general-sans: system-ui, -apple-system, sans-serif;
@@ -14,4 +15,14 @@
 
 body {
   background-color: #f1f2ed;
+}
+
+/* Scroll-reveal utility — see components/reveal.tsx. Elements start
+   hidden only once JS confirms it can animate them in, so content is
+   never lost if JS fails to load. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
