@@ -11,8 +11,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ------------------------------------------------------------
@@ -230,6 +231,7 @@ enum ServiceType {
   PASSPORT
   FINANCIAL_ADVISORY
   CAC_REGISTRATION
+  GENERAL_INQUIRY
 }
 
 model Service {

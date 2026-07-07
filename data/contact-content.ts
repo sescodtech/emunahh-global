@@ -30,9 +30,9 @@ export const serviceOptions = [
 
 export const urgencyOptions = [
   { value: "STANDARD", label: "Just exploring" },
-  { value: "WITHIN_WEEK", label: "Within a week" },
-  { value: "WITHIN_MONTH", label: "Within a month" },
+  { value: "PRIORITY", label: "Within a week" },
   { value: "URGENT", label: "Urgent – ASAP" },
+  { value: "EMERGENCY", label: "Emergency" },
 ];
 
 // Drives the smart conditional fields (fixes audit #3 — one form for
