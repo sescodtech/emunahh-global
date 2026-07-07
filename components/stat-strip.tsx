@@ -14,7 +14,7 @@ export function StatStrip({ stats }: { stats: Stat[] }) {
           <dt className="font-mono text-xs uppercase tracking-wide text-stamp-gold">
             {stat.label}
           </dt>
-          <dd className="mt-1 font-display text-2xl sm:text-3xl italic text-boarding-paper">
+          <dd className="mt-1 font-sans font-extrabold tracking-tight text-2xl sm:text-3xl text-boarding-paper">
             {stat.value}
           </dd>
         </div>

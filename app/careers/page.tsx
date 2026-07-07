@@ -20,7 +20,7 @@ export default function CareersPage() {
           <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
             {careersHero.eyebrow}
           </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl italic leading-tight text-boarding-paper sm:text-5xl">
+          <h1 className="mt-4 max-w-2xl font-sans font-extrabold tracking-tight text-4xl leading-tight text-boarding-paper sm:text-5xl">
             {careersHero.headline}
           </h1>
           <p className="mt-6 max-w-xl text-boarding-paper/80">{careersHero.subcopy}</p>
@@ -41,7 +41,7 @@ export default function CareersPage() {
                 <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-ink-navy/5 transition-shadow hover:shadow-md">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <h3 className="font-display text-xl italic text-ink-navy">{job.title}</h3>
+                      <h3 className="font-sans font-bold tracking-tight text-xl text-ink-navy">{job.title}</h3>
                       <p className="mt-1 font-mono text-xs text-slate">
                         {job.department} · {job.location} · {job.type}
                       </p>
@@ -93,7 +93,7 @@ export default function CareersPage() {
 
             {openRoles.length === 0 && (
               <div className="rounded-2xl bg-white p-10 text-center shadow-sm ring-1 ring-ink-navy/5">
-                <p className="font-display text-xl italic text-ink-navy">No open roles right now</p>
+                <p className="font-sans font-bold tracking-tight text-xl text-ink-navy">No open roles right now</p>
                 <p className="mt-2 text-sm text-slate">
                   Check back soon, or send your CV to{" "}
                   <a href={`mailto:${siteSettings.email}`} className="text-brand-green underline">
@@ -106,7 +106,7 @@ export default function CareersPage() {
           </div>
 
           <div className="mt-10 rounded-2xl bg-ink-navy p-8 text-center">
-            <p className="font-display text-xl italic text-boarding-paper">
+            <p className="font-sans font-bold tracking-tight text-xl text-boarding-paper">
               Don't see the right role?
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm text-boarding-paper/70">

@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 /**
- * A single, subtle commercial-aircraft flyover across the hero. Plays
- * once when the hero enters the viewport — not on a repeating loop.
+ * A subtle commercial-aircraft flyover across the hero. Flies in from
+ * the left, crosses the hero, flies out to the right, then repeats
+ * automatically every 10 seconds for as long as the hero is in view.
  * Renders nothing at all if the user prefers reduced motion.
  */
 export function PlaneFlyover({ src = "/images/plane.png" }: { src?: string }) {

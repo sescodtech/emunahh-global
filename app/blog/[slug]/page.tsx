@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             ← Back to Blog
           </Link>
           <span className="mt-6 block text-4xl">{post.coverEmoji}</span>
-          <h1 className="mt-3 font-display text-3xl italic leading-tight text-boarding-paper sm:text-4xl">
+          <h1 className="mt-3 font-sans font-extrabold tracking-tight text-3xl leading-tight text-boarding-paper sm:text-4xl">
             {post.title}
           </h1>
           <p className="mt-4 font-mono text-xs text-boarding-paper/60">
@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </article>
 
           <div className="mt-12 rounded-2xl bg-boarding-paper p-8 text-center">
-            <p className="font-display text-xl italic text-ink-navy">Ready to get started?</p>
+            <p className="font-sans font-bold tracking-tight text-xl text-ink-navy">Ready to get started?</p>
             <p className="mx-auto mt-2 max-w-md text-sm text-slate">
               Fill our enquiry form and our team will get back to you within 24 hours.
             </p>

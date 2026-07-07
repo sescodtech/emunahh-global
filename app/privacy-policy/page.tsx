@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
         <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
           Legal
         </p>
-        <h1 className="mt-3 font-display text-4xl italic text-ink-navy">
+        <h1 className="mt-3 font-sans font-extrabold tracking-tight text-4xl text-ink-navy">
           Privacy Policy
         </h1>
         <p className="mt-2 text-sm text-slate">Last updated: [DATE — set before launch]</p>

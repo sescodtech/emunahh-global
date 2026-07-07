@@ -47,10 +47,12 @@ const config: Config = {
           "100%": { transform: "translateX(-50%)" },
         },
         "plane-fly": {
-          "0%": { transform: "translate(-10%, 6%)", opacity: "0" },
-          "10%": { opacity: "1" },
-          "90%": { opacity: "1" },
-          "100%": { transform: "translate(115%, -10%)", opacity: "0" },
+          "0%": { transform: "translate(-15%, 8%)", opacity: "0" },
+          "8%": { opacity: "1" },
+          "45%": { transform: "translate(50%, -2%)", opacity: "1" },
+          "82%": { opacity: "1" },
+          "92%": { transform: "translate(120%, -12%)", opacity: "0" },
+          "100%": { transform: "translate(120%, -12%)", opacity: "0" },
         },
         "cloud-drift": {
           "0%": { transform: "translateX(-6%)", opacity: "0" },
@@ -62,8 +64,9 @@ const config: Config = {
         "stamp-press": "stamp-press 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both",
         "fade-up": "fade-up 700ms cubic-bezier(0.16,1,0.3,1) both",
         marquee: "marquee 34s linear infinite",
-        // Plays once (no "infinite") — a single elegant flyover, not a loop.
-        "plane-fly": "plane-fly 14s cubic-bezier(0.45,0,0.4,1) both",
+        // Loops every 10s — flies in from the left, crosses the hero,
+        // flies out to the right, brief pause, then repeats.
+        "plane-fly": "plane-fly 10s cubic-bezier(0.45,0,0.4,1) infinite",
         "cloud-drift": "cloud-drift 40s ease-in-out both",
       },
     },

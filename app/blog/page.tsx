@@ -25,7 +25,7 @@ export default function BlogPage() {
           <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
             Emunahh Global Blog
           </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl italic leading-tight text-boarding-paper sm:text-5xl">
+          <h1 className="mt-4 max-w-2xl font-sans font-extrabold tracking-tight text-4xl leading-tight text-boarding-paper sm:text-5xl">
             Travel & Business Insights
           </h1>
           <p className="mt-6 max-w-xl text-boarding-paper/80">
@@ -46,7 +46,7 @@ export default function BlogPage() {
                   className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-ink-navy/5 transition-shadow hover:shadow-md"
                 >
                   <span className="text-3xl">{post.coverEmoji}</span>
-                  <h3 className="mt-3 font-display text-lg italic text-ink-navy">{post.title}</h3>
+                  <h3 className="mt-3 font-sans font-bold tracking-tight text-lg text-ink-navy">{post.title}</h3>
                   <p className="mt-2 flex-1 text-sm text-slate">{post.excerpt}</p>
                   <div className="mt-4 flex items-center justify-between font-mono text-xs text-slate">
                     <span>{formatDate(post.publishedAt)}</span>

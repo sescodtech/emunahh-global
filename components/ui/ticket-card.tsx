@@ -19,11 +19,11 @@ export function TicketCard({ stub, children, className }: TicketCardProps) {
   return (
     <div
       className={cn(
-        "relative flex rounded-2xl bg-white shadow-sm ring-1 ring-ink-navy/5 overflow-hidden",
+        "group relative flex rounded-2xl bg-white shadow-sm ring-1 ring-ink-navy/5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-stamp-gold/30",
         className
       )}
     >
-      <div className="flex w-20 shrink-0 items-center justify-center bg-ink-navy font-mono text-boarding-paper text-sm">
+      <div className="flex w-20 shrink-0 items-center justify-center bg-ink-navy font-sans text-xl font-extrabold text-stamp-gold transition-colors sm:w-24 sm:text-2xl">
         {stub}
       </div>
 
@@ -34,7 +34,7 @@ export function TicketCard({ stub, children, className }: TicketCardProps) {
         <div className="h-full border-l border-dashed border-ink-navy/15" />
       </div>
 
-      <div className="flex-1 p-5">{children}</div>
+      <div className="flex-1 p-6 sm:p-7">{children}</div>
     </div>
   );
 }

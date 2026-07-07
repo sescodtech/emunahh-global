@@ -28,7 +28,7 @@ export function ContactForm() {
     return (
       <div className="rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-ink-navy/5">
         <p className="text-3xl">🎉</p>
-        <h3 className="mt-2 font-display text-2xl italic text-ink-navy">Enquiry Received!</h3>
+        <h3 className="mt-2 font-sans font-bold tracking-tight text-2xl text-ink-navy">Enquiry Received!</h3>
         <p className="mt-2 text-sm text-slate">
           Thank you for contacting Emunahh Global Consult. We'll get back to you within{" "}
           <strong>24 hours</strong>.
@@ -45,7 +45,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-ink-navy/5 sm:p-8">
-      <h3 className="font-display text-2xl italic text-ink-navy">Send Us an Enquiry</h3>
+      <h3 className="font-sans font-bold tracking-tight text-2xl text-ink-navy">Send Us an Enquiry</h3>
       <p className="mt-1 text-sm text-slate">We'll get back to you within 24 hours.</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">

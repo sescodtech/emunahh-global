@@ -18,7 +18,7 @@ export default function FaqPage() {
           <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
             Frequently Asked Questions
           </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl italic leading-tight text-boarding-paper sm:text-5xl">
+          <h1 className="mt-4 max-w-2xl font-sans font-extrabold tracking-tight text-4xl leading-tight text-boarding-paper sm:text-5xl">
             Got Questions? We've Got Answers.
           </h1>
           <p className="mt-6 max-w-xl text-boarding-paper/80">

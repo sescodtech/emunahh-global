@@ -14,7 +14,7 @@ export default function ContactPage() {
           <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
             {contactHero.eyebrow} · {contactHero.kicker}
           </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl italic leading-tight text-boarding-paper sm:text-5xl">
+          <h1 className="mt-4 max-w-2xl font-sans font-extrabold tracking-tight text-4xl leading-tight text-boarding-paper sm:text-5xl">
             {contactHero.headline}
           </h1>
           <p className="mt-6 max-w-xl text-boarding-paper/80">{contactHero.subcopy}</p>
@@ -114,7 +114,7 @@ export default function ContactPage() {
       {/* FINAL CTA */}
       <section className="bg-ink-navy py-20">
         <Container className="text-center">
-          <h2 className="font-display text-3xl italic text-boarding-paper sm:text-4xl">
+          <h2 className="font-sans font-extrabold tracking-tight text-3xl text-boarding-paper sm:text-4xl">
             Ready to Get Moving? Fill the Form Now.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-boarding-paper/80">

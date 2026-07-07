@@ -18,11 +18,11 @@ export const serviceStats = [
 ];
 
 export const serviceChips = [
-  "✈️ Flight Bookings",
-  "🌍 Travel & Visa",
-  "📘 Int'l Passport",
-  "💼 Financial Advisory",
-  "🏢 Biz Registration",
+  { icon: "plane", label: "Flight Bookings" },
+  { icon: "globe", label: "Travel & Visa" },
+  { icon: "book-open", label: "Int'l Passport" },
+  { icon: "wallet", label: "Financial Advisory" },
+  { icon: "building", label: "Biz Registration" },
 ];
 
 export const servicesDetailed = [
@@ -74,10 +74,10 @@ export const servicesDetailed = [
 ];
 
 export const serviceProcessSteps = [
-  { step: 1, icon: "📋", title: "Fill the Form", description: "Fill our enquiry form from anywhere in Nigeria. Tell us your destination and what service you need." },
-  { step: 2, icon: "🗂️", title: "Consultation", description: "We assess your situation and recommend the best service path tailored specifically for you." },
-  { step: 3, icon: "⚙️", title: "We Handle It", description: "Our team processes your request with precision and speed — keeping you updated throughout." },
-  { step: 4, icon: "🎉", title: "You Succeed", description: "Receive your results and achieve your travel, financial or business goal — stress-free." },
+  { step: 1, icon: "clipboard-list", title: "Fill the Form", description: "Fill our enquiry form from anywhere in Nigeria. Tell us your destination and what service you need." },
+  { step: 2, icon: "users", title: "Consultation", description: "We assess your situation and recommend the best service path tailored specifically for you." },
+  { step: 3, icon: "settings", title: "We Handle It", description: "Our team processes your request with precision and speed — keeping you updated throughout." },
+  { step: 4, icon: "badge-check", title: "You Succeed", description: "Receive your results and achieve your travel, financial or business goal — stress-free." },
 ];
 
 export const whyEmunahh = {
@@ -85,17 +85,17 @@ export const whyEmunahh = {
   heading: "We Don't Just Offer Services. We Partner With You.",
   body: "Every client is unique. We listen, we plan, and we deliver — with honesty, care and a genuine commitment to your success. No hidden fees. No fake promises. Just real service.",
   values: [
-    { icon: "🤝", title: "Integrity — Always Transparent", body: "No hidden fees, no misleading promises. What we say is exactly what we deliver." },
-    { icon: "⭐", title: "Excellence — Quality Every Time", body: "We hold ourselves to a high standard on every service for every single client." },
-    { icon: "🚀", title: "Empowerment — Beyond the Service", body: "We equip you with knowledge and tools to keep achieving long after we're done." },
-    { icon: "💡", title: "Innovation — Smarter Solutions", body: "We constantly improve the way we serve to give you better, faster results." },
+    { icon: "handshake", title: "Integrity — Always Transparent", body: "No hidden fees, no misleading promises. What we say is exactly what we deliver." },
+    { icon: "sparkles", title: "Excellence — Quality Every Time", body: "We hold ourselves to a high standard on every service for every single client." },
+    { icon: "rocket", title: "Empowerment — Beyond the Service", body: "We equip you with knowledge and tools to keep achieving long after we're done." },
+    { icon: "lightbulb", title: "Innovation — Smarter Solutions", body: "We constantly improve the way we serve to give you better, faster results." },
   ],
 };
 
 export const trustBadges = [
-  "🔒 Secure & Confidential",
-  "✅ 98% Visa Success Rate",
-  "⚡ Fast Turnaround",
-  "🇳🇬 RC 8937100 — CAC Registered",
-  "⭐ 5-Star Client Rating",
+  { icon: "shield-check", label: "Secure & Confidential" },
+  { icon: "badge-check", label: "98% Visa Success Rate" },
+  { icon: "zap", label: "Fast Turnaround" },
+  { icon: "flag", label: "RC 8937100 — CAC Registered" },
+  { icon: "star", label: "5-Star Client Rating" },
 ];

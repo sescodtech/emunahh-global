@@ -26,7 +26,7 @@ export default function AboutPage() {
             <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
               {aboutHero.eyebrow} · {aboutHero.kicker}
             </p>
-            <h1 className="mt-4 font-display text-4xl italic leading-tight text-boarding-paper sm:text-5xl">
+            <h1 className="mt-4 font-sans font-extrabold tracking-tight text-4xl leading-tight text-boarding-paper sm:text-5xl">
               {aboutHero.headline}
             </h1>
             <p className="mt-6 max-w-xl text-boarding-paper/80">{aboutHero.subcopy}</p>
@@ -45,7 +45,7 @@ export default function AboutPage() {
 
           {/* Company card */}
           <div className="rounded-2xl bg-boarding-paper p-6">
-            <p className="font-display text-lg italic text-ink-navy">Emunahh Global Consult</p>
+            <p className="font-sans font-bold tracking-tight text-lg text-ink-navy">Emunahh Global Consult</p>
             <p className="font-mono text-xs text-slate">{companyCard.rcNumber}</p>
             <dl className="mt-4 space-y-3 text-sm">
               <div>
@@ -75,13 +75,13 @@ export default function AboutPage() {
           <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">
             {ourStory.eyebrow} · {ourStory.year}
           </p>
-          <h2 className="mt-3 font-display text-3xl italic text-ink-navy sm:text-4xl">
+          <h2 className="mt-3 font-sans font-extrabold tracking-tight text-3xl text-ink-navy sm:text-4xl">
             {ourStory.heading}
           </h2>
           {ourStory.paragraphs.map((p) => (
             <p key={p} className="mt-4 text-slate leading-relaxed">{p}</p>
           ))}
-          <blockquote className="mt-6 border-l-2 border-stamp-gold pl-4 font-display text-xl italic text-ink-navy">
+          <blockquote className="mt-6 border-l-2 border-stamp-gold pl-4 font-sans font-bold tracking-tight text-xl text-ink-navy">
             "{ourStory.quote}"
             <footer className="mt-2 font-mono text-xs not-italic text-slate">
               — {ourStory.quoteAttribution}
@@ -98,12 +98,12 @@ export default function AboutPage() {
         <Container className="grid gap-8 sm:grid-cols-2">
           <div className="rounded-2xl bg-white p-6">
             <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">Our Mission</p>
-            <h3 className="mt-2 font-display text-xl italic text-ink-navy">{mission.heading}</h3>
+            <h3 className="mt-2 font-sans font-bold tracking-tight text-xl text-ink-navy">{mission.heading}</h3>
             <p className="mt-2 text-sm text-slate">{mission.body}</p>
           </div>
           <div className="rounded-2xl bg-white p-6">
             <p className="font-mono text-xs uppercase tracking-widest text-stamp-gold">Our Vision</p>
-            <h3 className="mt-2 font-display text-xl italic text-ink-navy">{vision.heading}</h3>
+            <h3 className="mt-2 font-sans font-bold tracking-tight text-xl text-ink-navy">{vision.heading}</h3>
             <p className="mt-2 text-sm text-slate">{vision.body}</p>
           </div>
         </Container>
@@ -188,7 +188,7 @@ export default function AboutPage() {
       {/* FINAL CTA */}
       <section className="bg-ink-navy py-20">
         <Container className="text-center">
-          <h2 className="font-display text-3xl italic text-boarding-paper sm:text-4xl">
+          <h2 className="font-sans font-extrabold tracking-tight text-3xl text-boarding-paper sm:text-4xl">
             Now You Know Who We Are. Let's Work Together.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-boarding-paper/80">

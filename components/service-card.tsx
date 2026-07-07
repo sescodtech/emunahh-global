@@ -28,7 +28,7 @@ export function ServiceCard({
               <Image src={imageUrl} alt="" fill className="object-cover" />
             </div>
           )}
-          <h3 className="font-display text-xl italic text-ink-navy">{title}</h3>
+          <h3 className="font-sans font-bold tracking-tight text-xl text-ink-navy">{title}</h3>
           <p className="mt-1 text-sm text-slate">{shortDescription}</p>
           <ul className="mt-2 flex flex-wrap gap-2">
             {featureTags.map((tag) => (
