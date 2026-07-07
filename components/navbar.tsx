@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/layout";
-import { navMoreLinks } from "@/data/home-content";
 import { cn } from "@/lib/utils";
 
 interface NavLink {
@@ -15,11 +14,23 @@ interface NavLink {
 
 export function Navbar({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm">
-      <Container className="flex h-16 items-center justify-between">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled ? "bg-white/95 shadow-sm backdrop-blur" : "bg-white/70 backdrop-blur-sm"
+      )}
+    >
+      <Container className={cn("flex items-center justify-between transition-all duration-300", scrolled ? "h-16" : "h-20")}>
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
@@ -31,50 +42,16 @@ export function Navbar({ links }: { links: NavLink[] }) {
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-5 sm:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-body text-sm text-ink-navy/80 hover:text-brand-green"
+              className="font-body text-sm text-ink-navy/80 transition-colors hover:text-brand-green"
             >
               {link.label}
             </Link>
           ))}
-
-          <div
-            className="relative"
-            onMouseEnter={() => setMoreOpen(true)}
-            onMouseLeave={() => setMoreOpen(false)}
-          >
-            <button
-              type="button"
-              className="flex items-center gap-1 font-body text-sm text-ink-navy/80 hover:text-brand-green"
-              aria-expanded={moreOpen}
-              onClick={() => setMoreOpen((v) => !v)}
-            >
-              More
-              <span aria-hidden className={cn("text-xs transition-transform", moreOpen && "rotate-180")}>
-                ▾
-              </span>
-            </button>
-            <div
-              className={cn(
-                "absolute right-0 top-full mt-2 min-w-[160px] overflow-hidden rounded-xl bg-white py-2 shadow-lg ring-1 ring-ink-navy/10 transition-all",
-                moreOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
-              )}
-            >
-              {navMoreLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block px-4 py-2 font-body text-sm text-ink-navy/80 hover:bg-boarding-paper hover:text-brand-green"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
 
           <Button asChild variant="primary" size="sm">
             <Link href="/contact-us">Book Consultation</Link>
@@ -83,7 +60,7 @@ export function Navbar({ links }: { links: NavLink[] }) {
 
         <button
           type="button"
-          className="sm:hidden text-ink-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded-md p-2"
+          className="lg:hidden rounded-md p-2 text-ink-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -96,12 +73,12 @@ export function Navbar({ links }: { links: NavLink[] }) {
       <div
         id="mobile-menu"
         className={cn(
-          "sm:hidden overflow-hidden transition-[max-height] duration-300 border-t border-ink-navy/5",
+          "overflow-hidden border-t border-ink-navy/5 transition-[max-height] duration-300 lg:hidden",
           open ? "max-h-[28rem]" : "max-h-0"
         )}
       >
         <Container className="flex flex-col gap-4 py-6">
-          {[...links, ...navMoreLinks].map((link) => (
+          {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}

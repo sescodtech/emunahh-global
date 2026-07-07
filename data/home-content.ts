@@ -186,15 +186,13 @@ export const siteSettings = {
   whatsappNumber: "2348179171456",
 };
 
+// Every item shown directly in the desktop nav — no hidden "More" menu.
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Service", href: "/service" },
   { label: "About Us", href: "/about-us" },
-  { label: "Contact us", href: "/contact-us" },
-];
-
-export const navMoreLinks = [
   { label: "Blog", href: "/blog" },
   { label: "Careers", href: "/careers" },
   { label: "FAQ", href: "/faq" },
+  { label: "Contact us", href: "/contact-us" },
 ];

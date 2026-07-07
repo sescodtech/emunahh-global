@@ -9,6 +9,8 @@ interface FooterProps {
   phonePrimary: string;
   phoneSecondary?: string;
   email: string;
+  officeAddress?: string;
+  workingHours?: string;
   logoUrl?: string;
   instagramHandle?: string;
   tiktokHandle?: string;
@@ -33,6 +35,23 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
   );
 }
 
+function FooterColumn({ heading, links }: { heading: string; links: { label: string; href: string }[] }) {
+  return (
+    <div>
+      <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-stamp-gold">{heading}</p>
+      <ul className="space-y-2.5">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className="font-body text-sm text-boarding-paper/70 hover:text-boarding-paper transition-colors">
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function Footer({
   companyName,
   rcNumber,
@@ -40,6 +59,8 @@ export function Footer({
   phonePrimary,
   phoneSecondary,
   email,
+  officeAddress,
+  workingHours,
   logoUrl = "/logo.png",
   instagramHandle,
   tiktokHandle,
@@ -51,24 +72,18 @@ export function Footer({
 }: FooterProps) {
   return (
     <footer className="bg-ink-navy text-boarding-paper/80">
-      <Container className="grid gap-10 py-14 sm:grid-cols-3">
+      <Container className="grid gap-12 py-16 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+        {/* Company intro */}
         <div>
           <Link href="/" className="inline-flex items-center rounded-lg bg-white px-3 py-2">
             <Image src={logoUrl} alt={companyName} width={150} height={50} className="h-8 w-auto object-contain" />
           </Link>
-          <p className="mt-3 font-mono text-xs text-boarding-paper/60">{tagline} · {rcNumber}</p>
-        </div>
-
-        <div className="font-body text-sm space-y-1">
-          <p className="mb-2 font-mono text-xs uppercase tracking-wide text-stamp-gold">Get In Touch</p>
-          <p>{phonePrimary}</p>
-          {phoneSecondary && <p>{phoneSecondary}</p>}
-          <p>{email}</p>
-        </div>
-
-        <div>
-          <p className="mb-2 font-mono text-xs uppercase tracking-wide text-stamp-gold">Follow Us</p>
-          <div className="flex flex-wrap gap-2">
+          <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-boarding-paper/70">
+            Nigeria&rsquo;s trusted partner for flights, visas, passports, financial advisory and
+            business registration &mdash; handled end to end, nationwide.
+          </p>
+          <p className="mt-4 font-mono text-xs text-boarding-paper/50">{tagline} &middot; {rcNumber}</p>
+          <div className="mt-5 flex flex-wrap gap-2">
             {whatsappNumber && (
               <SocialLink href={`https://wa.me/${whatsappNumber}`} label="WhatsApp">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.09-1.34A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18a7.94 7.94 0 0 1-4.06-1.11l-.29-.17-3.02.79.8-2.94-.19-.3A7.95 7.95 0 1 1 12 20z"/></svg>
@@ -105,19 +120,55 @@ export function Footer({
               </SocialLink>
             )}
           </div>
-          <Link href="/privacy-policy" className="mt-4 block underline underline-offset-2 text-sm">
-            Privacy Policy
-          </Link>
+        </div>
+
+        <FooterColumn
+          heading="Quick Links"
+          links={[
+            { label: "Home", href: "/" },
+            { label: "About Us", href: "/about-us" },
+            { label: "Services", href: "/service" },
+            { label: "Contact Us", href: "/contact-us" },
+          ]}
+        />
+
+        <FooterColumn
+          heading="Services"
+          links={[
+            { label: "Flight Bookings", href: "/service" },
+            { label: "Travel & Visa Consultancy", href: "/service" },
+            { label: "International Passport", href: "/service" },
+            { label: "Financial Advisory", href: "/service" },
+            { label: "Business Registration (CAC)", href: "/service" },
+          ]}
+        />
+
+        <div>
+          <FooterColumn
+            heading="Resources"
+            links={[
+              { label: "Blog", href: "/blog" },
+              { label: "Careers", href: "/careers" },
+              { label: "FAQ", href: "/faq" },
+            ]}
+          />
+
+          <div className="mt-8">
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.15em] text-stamp-gold">Get In Touch</p>
+            <p className="font-body text-sm text-boarding-paper/70">{phonePrimary}</p>
+            {phoneSecondary && <p className="font-body text-sm text-boarding-paper/70">{phoneSecondary}</p>}
+            <p className="font-body text-sm text-boarding-paper/70">{email}</p>
+            {officeAddress && <p className="mt-2 font-body text-sm text-boarding-paper/70">{officeAddress}</p>}
+            {workingHours && <p className="mt-1 font-mono text-xs text-boarding-paper/50">{workingHours}</p>}
+          </div>
         </div>
       </Container>
 
-      <Container className="flex flex-wrap items-center justify-between gap-2 border-t border-boarding-paper/10 py-4 font-mono text-xs">
-        <span>© {new Date().getFullYear()} {companyName}</span>
-        <div className="flex gap-4">
-          <Link href="/blog" className="hover:text-boarding-paper">Blog</Link>
-          <Link href="/careers" className="hover:text-boarding-paper">Careers</Link>
-          <Link href="/faq" className="hover:text-boarding-paper">FAQ</Link>
-        </div>
+      <Container className="flex flex-wrap items-center justify-between gap-3 border-t border-boarding-paper/10 py-6 font-mono text-xs text-boarding-paper/60">
+        <span>&copy; {new Date().getFullYear()} {companyName}. All rights reserved.</span>
+        <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-boarding-paper">
+          Privacy Policy
+        </Link>
       </Container>
     </footer>
   );
